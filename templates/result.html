@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCOS Risk Prediction Result</title>
+    <style>
+        body {
+            font-family: 'Lucida Sans', sans-serif;
+            background-color: lightblue;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 50px;
+        }
+
+        #result-container {
+            margin: 20px auto;
+            width: 1000px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            font-size: 20px;
+            color: black;
+        }
+
+        #result-container img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your PCOS Prediction Result</h1>
+    <div id="result-container">
+        <svg id="progress" width="200" height="200"></svg>
+        <div class="result-info">
+            <p>Probability: <span id="percentage">{{ percentage }}</span>%</p>
+            <p><span id="prediction">{{ result }}</span></p>
+            <img id="resultImage" src="static\res1.jpg" alt="Result Image">
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const percentage = parseInt(document.getElementById('percentage').textContent);
+            const result = document.getElementById('prediction').textContent;
+            const svg = document.getElementById('progress');
+            const size = 200; 
+            const strokeWidth = 20; 
+            const radius = (size - strokeWidth) / 2; 
+            const circumference = 2 * Math.PI * radius; 
+
+            const background = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            background.setAttribute('stroke', '#eee');
+            background.setAttribute('stroke-width', strokeWidth);
+            background.setAttribute('fill', 'none');
+            background.setAttribute('r', radius);
+            background.setAttribute('cx', size / 2);
+            background.setAttribute('cy', size / 2);
+            svg.appendChild(background);
+
+            const progress = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            progress.setAttribute('stroke', result === 'Yes' ? '#dc3545' : '#28a745');
+            progress.setAttribute('stroke-width', strokeWidth);
+            progress.setAttribute('fill', 'none');
+            progress.setAttribute('r', radius);
+            progress.setAttribute('cx', size / 2);
+            progress.setAttribute('cy', size / 2);
+            progress.setAttribute('stroke-dasharray', circumference);
+            progress.setAttribute('stroke-dashoffset', circumference - (percentage / 100) * circumference);
+            svg.appendChild(progress);
+
+            document.getElementById('prediction').innerText = result === 'Yes' ? 'You are likely to find relief with proper treatment.' : 'Preventive measures can help manage symptoms.';
+            const imageURL = result === 'Yes' ? 'static/res1.jpg' : 'static/res1.jpg';
+            document.getElementById('resultImage').setAttribute('src', imageURL);
+        });
+    </script>
+</body>
+</html>

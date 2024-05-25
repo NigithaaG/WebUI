@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCOS Risk Prediction Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap');
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+        }
+        body {
+            align-items: center;
+            background: pink;
+            color: rgba(0,0,0,.8);
+            display: grid;
+            font-family: 'Montserrat',sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            height: 100vh;
+            justify-items: center;
+            weight: 100vw;
+        }
+    
+        .signup-container {
+            display: grid;
+            grid-template-areas: "left right";
+            width: 1000px;
+        }
+    
+        .left-container {
+            background: #807182;
+            overflow: hidden;
+            padding: 40px 0 0 0;
+            position: relative;
+            text-align: center;
+            width: 400px;
+        
+            .puppy {
+                bottom: -5px;
+                position: absolute;
+                text-align: center;
+            
+                &:before {
+                    content: "";
+                    height: 100%;
+                    left: 0;
+                    position: absolute;
+                    width: 100%;
+                    z-index: 1;
+                }
+            }
+        
+            img {
+                height: 500px;
+                width: 400px;
+            }
+        }
+    
+        .right-container {
+            background: lighten(#F7B1AB, 5%);
+            display: grid;
+            grid-template-areas: "." ".";
+            margin-left: 20px;
+            width: 700px;
+            font-size: medium;
+        
+            & h1:nth-of-type(1) {
+                color: white;
+                font-size: 35px;
+                font-weight: 600;
+                text-align: center;
+            }
+        
+            & .set {
+                display: flex;
+                justify-content: space-between;
+                margin: 10px 0;
+            }
+        
+            & input {
+            border: 1px solid rgba(0,0,0,.1);
+            border-radius: 4px;
+            height: 38px;
+            line-height: 38px;
+            padding-left: 5px;
+            font-size: 16px; 
+            }
+        
+            & input, label {
+                color: rgba(0,0,0,.8);
+            }
+    
+            & label {
+                background-color: white;
+                margin-bottom: 5px;
+                padding: 5px; 
+            }
+        
+            & header {
+                padding: 40px;
+            }
+    
+            & label, input, .pets-photo {
+            width: 300px;
+            }
+        
+            & .pets-photo {
+            align-items: center;
+            display: grid;
+            grid-template-areas: ". .";
+            
+            & button {
+                border: none;
+                border-radius: 50%;
+                height: 38px;
+                margin-right: 10px;
+                outline: none;
+                width: 38px;
+            }
+            
+            & button i {
+                color: rgba(0,0,0,.8);
+                font-size: 16px;
+            }
+            }
+        
+            .pets-weight .radio-container {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            }
+        
+            footer {
+            align-items: center;
+            background: #fff;
+            display: grid;
+            padding: 5px 40px;
+        
+            & button {
+                border: 1px solid rgba(0,0,0,.2);
+                height: 38px;
+                line-height: 38px;
+                width: 100px;
+                border-radius: 19px;
+                font-family: 'Montserrat',sans-serif;
+            }
+        
+            & #back {
+                background: #fff;
+                transition: .2s all ease-in-out;
+                
+                &:hover {
+                background: #171A2B;
+                color: white;
+                }
+            }
+        
+            & #next {
+                background: #807182;
+                border: 1px solid transparent;
+                color: #fff;
+                
+                &:hover {
+                background: #171A2B;
+                }
+            }
+            }
+        }
+    
+        .pets-name, .pets-breed, .pets-birthday, .pets-gender, .pets-spayed-neutered, .pets-weight {
+        & label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        }
+    
+        .radio-container {
+            background: #fff;
+            border: 1px solid rgba(0,0,0,.1);
+            border-radius: 4px;
+            display: inline-block;
+            padding: 5px;
+        }
+        .radio-container label {
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            display: inline-block;
+            height: 26px;
+            line-height: 26px;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            transition: .2s all ease-in-out;
+            width: 141px;
+            font-size: 16px;
+        }
+        .radio-container input[type="radio"] {
+            display: none;
+        }
+        .radio-container input[type="radio"]:checked + label {
+            background: #F7B1AB;
+            border: 1px solid rgba(0,0,0,.1);
+        }
+
+    </style>
+    
+</head>
+<body>
+    <div class="signup-container">
+        <div class="left-container">
+            <div class="puppy">
+                <img src="static\n.png" alt="Puppy">
+            </div>
+        </div>
+        <div class="right-container">
+            <header>
+                <h1>Predict your Risk Level</h1>
+            </header>
+            <form action="/predict" method="POST">
+                <div class="set pets-name">
+                    <label for="follicle_no_r">Follicle Number Right</label>
+                    <input type="number" id="follicle_no_r" name="follicle_no_r" step="any" required>
+                </div>
+                <div class="set pets-breed">
+                    <label for="follicle_no_l">Follicle Number Left</label>
+                    <input type="number" id="follicle_no_l" name="follicle_no_l" step="any" required>
+                </div>
+                <div class="set pets-birthday">
+                    <label for="hair_growth">Hair Growth</label>
+                    <div class="radio-container">
+                        <input type="radio" id="hair_growth_yes" name="hair_growth" value="Y" required>
+                        <label for="hair_growth_yes">Yes</label>
+                        <input type="radio" id="hair_growth_no" name="hair_growth" value="N" required>
+                        <label for="hair_growth_no">No</label>
+                    </div>
+                </div>
+                <div class="set pets-gender">
+                    <label for="skin_darkening">Skin Darkening</label>
+                    <div class="radio-container">
+                        <input type="radio" id="skin_darkening_yes" name="skin_darkening" value="Y" required>
+                        <label for="skin_darkening_yes">Yes</label>
+                        <input type="radio" id="skin_darkening_no" name="skin_darkening" value="N" required>
+                        <label for="skin_darkening_no">No</label>
+                    </div>
+                </div>
+                <div class="set pets-spayed-neutered">
+                    <label for="weight_gain">Weight Gain</label>
+                    <div class="radio-container">
+                        <input type="radio" id="weight_gain_yes" name="weight_gain" value="Y" required>
+                        <label for="weight_gain_yes">Yes</label>
+                        <input type="radio" id="weight_gain_no" name="weight_gain" value="N" required>
+                        <label for="weight_gain_no">No</label>
+                    </div>
+                </div>
+                <div class="set pets-weight">
+                    <label for="cycle">Cycle</label>
+                    <div class="radio-container">
+                        <input type="radio" id="cycle_r" name="cycle" value="R" required>
+                        <label for="cycle_r">Regular</label>
+                        <input type="radio" id="cycle_n" name="cycle" value="N" required>
+                        <label for="cycle_n">Irregular</label>
+                    </div>
+                </div>
+                <div class="set pets-gender">
+                    <label for="lh">Luteinizing Hormone (LH)</label>
+                    <input type="number" id="lh" name="lh" step="any" required>
+                </div>
+                <div class="set pets-breed">
+                    <label for="fast_food">Fast Food Consumption</label>
+                    <div class="radio-container">
+                        <input type="radio" id="fast_food_yes" name="fast_food" value="Y" required>
+                        <label for="fast_food_yes">Yes</label>
+                        <input type="radio" id="fast_food_no" name="fast_food" value="N" required>
+                        <label for="fast_food_no">No</label>
+                    </div>
+                </div>
+                <div class="set pets-birthday">
+                    <label for="fsh_lh">FSH to LH Ratio</label>
+                    <input type="number" id="fsh_lh" name="fsh_lh" step="any" required>
+                </div>
+                <div class="set pets-gender">
+                    <label for="cycle_length">Cycle Length</label>
+                    <input type="number" id="cycle_length" name="cycle_length" step="any" required>
+                </div>
+                <footer>
+                    <div class="set">
+                        <button id="back">Back</button>
+                        <button id="next">Predict</button>
+                    </div>
+                </footer>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

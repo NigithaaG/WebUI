@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mapbox Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibmlnaXRoYWEiLCJhIjoiY2xsM2NwYmRhMDhpejNxcDhmc2YzdjJjeCJ9.sWu2OGEP8ncLa_Bb2uUYXw'; 
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [78.14424943605064, 9.94984854314807], 
+        zoom: 10
+    });
+
+    var points = [
+        { lng: 78.14424943605064, lat: 9.94984854314807, description: 'Dr. B Renuka Devi - Gynecologist/Obstetrician in Madurai' },
+        { lng: 78.14170328954681, lat: 9.937810637248758, description: 'Dr. Lalitha S | Best Gynaecologist in Madurai | Ovarian Cyst | MTP | Fibroid | Cesarean |' },
+        { lng: 78.13113678106683, lat: 9.929534319820938, description: 'OBSTETRICS AND GYNAECOLOGY DEPARTMENT,GOVERNMENT RAJAJI HOSPITAL' },
+        { lng: 78.11609298960413, lat: 9.916676815784509, description: 'VISHWA HOSPITAL' },
+        { lng: 78.14839506893216, lat: 9.932633772457368, description: 'Dr. Hemaleka K - Gynecologist in Madurai | Apollo Hospitals' },
+        { lng: 78.08585385373857, lat: 9.942421871638158, description: 'Sri Saradha Clinic-Gynecology and Maternity Centre in Madurai' },
+        { lng: 77.00690842347139, lat: 11.052407913678682, description: 'Gynaecology Hospital - Dr.Chitra' },
+        { lng: 78.7434298846924, lat: 10.829702661995823, description: 'Dr Nirmala Obstetrician-gynecologist' },
+        { lng: 77.46346656167299, lat: 11.273703204451294, description: 'R.V CLINIC' },
+        { lng: 78.0291976267539, lat: 11.042970342872625, description: 'Dr. Udhayakumari, Apollo Hospital Obstetrician-gynecologist' }
+    ];
+
+    points.forEach(function(point) {
+        var popup = new mapboxgl.Popup({ offset: 25 }).setText(point.description);
+
+        new mapboxgl.Marker()
+            .setLngLat([point.lng, point.lat])
+            .setPopup(popup)
+            .addTo(map);
+    });
+</script>
+
+</body>
+</html>

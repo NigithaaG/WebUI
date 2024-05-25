@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: flask-app
+    repo: <your-repo-url>
+    branch: master
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
